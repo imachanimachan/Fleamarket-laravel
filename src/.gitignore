@@ -5,9 +5,9 @@
 /public/storage
 /storage/*
 !/storage/app/
+/storage/app/*
 !/storage/app/public/
-!storage/app/public/items/
-!storage/app/public/logo/
+/storage/app/public/*
 /vendor
 .env
 .env.backup
