@@ -24,10 +24,16 @@
             <form class="login__form" method="POST" action="/login">
                 @csrf
                 <label class="login__label">メールアドレス
-                    <input type="email" name="email" class="login__input">
+                    <input type="email" name="email" class="login__input" value="{{ old('email') }}">
+                    @error('email')
+                    <p class="login__error">{{ $message }}</p>
+                    @enderror
                 </label>
                 <label class="login__label">パスワード
-                    <input type="password" name="password" class="login__input">
+                    <input type="password" name="password" class="login__input" value="{{ old('password') }}">
+                    @error('password')
+                    <p class="login__error">{{ $message }}</p>
+                    @enderror
                 </label>
                 <button class="login__button" type="submit">ログインする</button>
             </form>

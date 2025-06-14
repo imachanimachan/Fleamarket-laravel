@@ -27,16 +27,8 @@
 		align-items: flex-start;
 		gap: 12px;
 	}
-
-	.top-header__search-form {
-		width: 100%;
-		margin: 0;
-	}
-
-	.top-header__nav-list {
-		flex-wrap: wrap;
-	}
 }
+
 
 /* レスポンシブ：PC最小幅 (1400px) に合わせた制限 */
 @media screen and (min-width: 1400px) {
@@ -92,4 +84,14 @@
     display: inline-block;
     color: #007bff;
     font-size: 14px;
+    text-decoration: none;
+}
+
+.register__error{
+    color: #ff6b6b;
+}
+
+.top-header__search-form {
+	width: auto;
+	margin-right: 16px;
 }

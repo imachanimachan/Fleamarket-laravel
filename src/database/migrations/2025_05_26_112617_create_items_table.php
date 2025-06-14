@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name', 255);
             $table->integer('price');
             $table->string('image_path', 255);
-            $table->string('color', 255)->nullable();;
             $table->string('brand', 255)->nullable();
             $table->text('description');
             $table->foreignId('status_id')->constrained()->cascadeOnDelete();

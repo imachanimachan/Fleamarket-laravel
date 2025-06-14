@@ -7,8 +7,7 @@ use App\Models\Like;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
+use App\Http\Requests\CommentRequest;
 
 
 class ItemController extends Controller
@@ -17,31 +16,40 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab');
+        $keyword = $request->query('keyword');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
+        if (!$tab) {
+            $tab = $user ? 'mylist' : 'recommend';
+        }
 
         if ($tab === 'mylist') {
-            /** @var \App\Models\User $user */
-            $user = Auth::user();
 
             if ($user) {
-                $items = $user->likedItems()->get();
+                $items = $user->likedItems()->with('order')->keywordSearch($keyword)->get();
             } else {
                 $items = collect();
             }
 
         } else {
-            $items = Item::select('id','image_path', 'name')->get();
+            $query = Item::select('id','image_path', 'name')->with('order')->keywordSearch($keyword);
+            if ($user) {
+                $query->where('user_id', '!=', $user->id);
+            }
+
+            $items = $query->get();
         }
 
-        return view('item.index', compact('items'));
+        return view('item.index', compact('items','tab','keyword'));
     }
 
-    public function show(Request $request)
+    public function show($id, Request $request)
     {
         // 商品取得
         $item = Item::with(['categories', 'comments.user', 'status'])
             ->withCount(['likes', 'comments'])
-            ->find($request->id);
+            ->find($id);
 
         // ログイン済みなら「いいね」済みかどうか判定
         $liked = false;
@@ -54,10 +62,6 @@ class ItemController extends Controller
 
     public function toggleLike(Request $request)
     {
-        if(!Auth::check()){
-            return redirect()->route('login');
-        }
-
         //いいね処理
         $userId = Auth::id();
                 $like = Like::where('item_id', $request->id)->where('user_id', $userId)->first();
@@ -74,12 +78,8 @@ class ItemController extends Controller
             return redirect()->back();
     }
 
-    public function comment(Request $request)
+    public function comment(CommentRequest $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
         $user = Auth::user();
         $commentData = $request->only('comment', 'item_id');
         $commentData['user_id'] = $user->id;

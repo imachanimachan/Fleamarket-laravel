@@ -4,24 +4,26 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('mypage.edit');
+        $user = Auth::user();
+
+        return view('mypage.edit',compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $user = Auth::user();
         $form = $request->all();
 
         if($request->hasFile('image_path')){
             $path = $request->file('image_path')->store('users','public');
+            $form['image_path'] = basename($path);
         }
-
-        $form['image_path'] = $path;
 
         unset($form['_token'], $form['_method']);
 
@@ -30,12 +32,20 @@ class ProfileController extends Controller
         return redirect('/');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        //ここに出品した商品と購入した商品を取ってくる処理を書く//
+        $tab = $request->query('tab');
 
-        return view('mypage.index',compact('user'));
+        if ($tab === 'buy') {
+            $items = $user->orders()->with('item')->get()->pluck('item');
+
+        } else {
+            $items= $user->items;
+        }
+
+        return view('mypage.index',compact('user','items'));
     }
 }

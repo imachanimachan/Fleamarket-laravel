@@ -11,7 +11,6 @@ class Item extends Model
         'name',
         'price',
         'image_path',
-        'color',
         'brand',
         'description',
         'status_id',
@@ -37,5 +36,22 @@ class Item extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class); // 注文情報が1件なら hasOne
+    }
+
+    public function getIsSoldAttribute(): bool
+    {
+        return $this->order !== null;
     }
 }

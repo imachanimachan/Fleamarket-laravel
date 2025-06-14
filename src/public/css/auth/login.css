@@ -93,4 +93,16 @@
     display: inline-block;
     color: #007bff;
     font-size: 14px;
+    text-decoration: none;
+}
+
+.login__error{
+    color: #ff6b6b;
+}
+
+.top-header__search-form {
+	width: 100%;
+}
+.top-header__nav-list {
+	display: flex;
 }

@@ -6,12 +6,12 @@
 	max-width: 1240px;
 	margin: 0 auto;
 	box-sizing: border-box;
-	gap: 5px;
+	gap: 70px;
 }
 
 .user-profile__image {
-	width: 80px;
-	height: 80px;
+	width: 120px;
+	height: 120px;
 	border-radius: 50%;
 	overflow: hidden;
 	flex-shrink: 0;
@@ -22,10 +22,6 @@
 	height: 100%;
 	object-fit: cover;
 	display: block;
-}
-
-.user-profile__info {
-	flex-grow: 1;
 }
 
 .user-profile__name {
@@ -40,39 +36,36 @@
 
 .user-profile__edit-btn {
 	display: inline-block;
-	padding: 10px 20px;
-	background-color: #e60000;
-	color: #fff;
-	text-decoration: none;
+	padding: 5px 10px;
+	color: #ff6b6b;
+	border: 1px solid #ff6b6b;
 	border-radius: 4px;
-	transition: background-color 0.3s;
+	margin-left: 200px;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
 }
 
-.user-profile__edit-btn:hover {
-	background-color: #cc0000;
-}
 
 /* タブレット（768〜850px）対応 */
 @media screen and (max-width: 850px) and (min-width: 768px) {
-	.user-profile {
-		flex-direction: column;
-		align-items: flex-start;
-	}
 	.user-profile__actions {
 		align-self: flex-end;
 		margin-top: 10px;
+	}
+	.user-profile__edit-btn {
+		margin-left: 0;
 	}
 }
 
 /* スマホ（〜767px）も対応するなら */
 @media screen and (max-width: 767px) {
-	.user-profile {
-		flex-direction: column;
-		align-items: flex-start;
-	}
 	.user-profile__actions {
 		align-self: flex-end;
 		margin-top: 10px;
+	}
+	.user-profile__edit-btn {
+		margin-left: 0;
 	}
 }
 

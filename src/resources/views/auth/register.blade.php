@@ -24,16 +24,28 @@
                 <form class="register__form" method="POST" action="/register">
                     @csrf
                     <label class="register__label">ユーザー名
-                        <input type="text" name="name" class="register__input">
+                        <input type="text" name="name" class="register__input" value="{{ old('name') }}">
+                        @error('name')
+                        <p class="register__error">{{ $message }}</p>
+                        @enderror
                     </label>
                     <label class="register__label">メールアドレス
-                        <input type="email" name="email" class="register__input">
+                        <input type="email" name="email" class="register__input" value="{{ old('email') }}">
+                        @error('email')
+                        <p class="register__error">{{ $message }}</p>
+                        @enderror
                     </label>
                     <label class="register__label">パスワード
-                        <input type="password" name="password" class="register__input">
+                        <input type="password" name="password" class="register__input" value="{{ old('password') }}">
+                        @error('password')
+                        <p class="register__error">{{ $message }}</p>
+                        @enderror
                     </label>
                     <label class="register__label">確認用パスワード
-                        <input type="password" name="password_confirmation" class="register__input">
+                        <input type="password" name="password_confirmation" class="register__input" value="{{ old('password_confirmation') }}">
+                        @error('password_confirmation')
+                        <p class="register__error">{{ $message }}</p>
+                        @enderror
                     </label>
                     <button class="register__button" type="submit">登録する</button>
                 </form>

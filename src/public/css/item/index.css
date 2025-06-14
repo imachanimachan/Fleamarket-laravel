@@ -78,3 +78,9 @@
 		padding: 20px 16px;
 	}
 }
+
+.item-card__sold{
+	color: #e60000;
+	font-weight: bold;
+	font-size: 20px;
+}

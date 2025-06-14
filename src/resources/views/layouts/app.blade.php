@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COACHTECH</title>
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout/sanitize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout/common.css') }}">
     @yield('css')
 </head>
 
@@ -17,9 +17,12 @@
             <div class="top-header__logo">
                 <img src="{{ asset('storage/logo/logo.svg') }}" alt="COACHTECH" class="top-header__logo-img">
             </div>
-            <form class="top-header__search-form" action="" method="" enctype="multipart/form-data">
+            <form class="top-header__search-form" action="/" method="GET">
                 @csrf
-                <input type="text" class="top-header__search-input" placeholder="なにをお探しですか？">
+                @if (request('tab') === 'mylist')
+                <input type="hidden" name="tab" value="mylist">
+                @endif
+                <input type="text" name="keyword" value="{{ request('keyword') }}" class="top-header__search-input" placeholder="なにをお探しですか？">
             </form>
             <nav class="top-header__nav">
                 <ul class="top-header__nav-list">
@@ -35,7 +38,7 @@
                     <li><a class="top-header__nav-item" href="/login">ログイン</a></li>
                     <li><a class="top-header__nav-item" href="/login">マイページ</a></li>
                     @endauth
-                    <li><a class="top-header__nav-item--white" href="#">出品</a></li>
+                    <li><a class="top-header__nav-item--white" href="/sell">出品</a></li>
                 </ul>
             </nav>
         </div>

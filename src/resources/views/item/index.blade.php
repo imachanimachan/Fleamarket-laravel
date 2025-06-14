@@ -7,8 +7,8 @@
 @section('content')
 <div class="item-list">
     <div class="item-list__tab">
-        <a href="/" class="item-list__tab-link {{ request('tab') !== 'mylist' ? 'item-list__tab-link--active' : '' }}">おすすめ</a>
-        <a href="/?tab=mylist" class="item-list__tab-link {{ request('tab') === 'mylist' ? 'item-list__tab-link--active' : '' }}">マイリスト</a>
+        <a href="{{ url('/') }}?tab=recommend&keyword={{ $keyword }}" class="item-list__tab-link {{ $tab === 'recommend' ? 'item-list__tab-link--active' : '' }}">おすすめ</a>
+        <a href="{{ url('/') }}?tab=mylist&keyword={{ $keyword }}" class="item-list__tab-link {{ $tab === 'mylist' ? 'item-list__tab-link--active' : '' }}">マイリスト</a>
     </div>
 
     <div class="item-list__grid">
@@ -20,9 +20,11 @@
                 </div>
             </a>
             <div class="item-card__name">{{ $item->name }}</div>
+            @if($item->is_sold)
+            <span class="item-card__sold">Sold</span>
+            @endif
         </div>
         @endforeach
-
     </div>
 </div>
 @endsection

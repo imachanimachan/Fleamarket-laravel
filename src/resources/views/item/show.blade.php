@@ -29,32 +29,42 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('item.purchase', ['id' => $item->id]) }}" class="item-detail__form">
+            <form method="GET" action="{{ route('item.purchase', ['id' => $item->id]) }}" class="item-detail__form">
                 @csrf
                 <button type="submit" class="item-detail__purchase-btn">購入手続きへ</button>
             </form>
-
-            {{-- 商品説明 --}}
+            <h2 class="item-detail__section-title">商品説明</h2>
             <div class="item-detail__description">
                 {{ $item->description }}
             </div>
 
             <div class="item-detail__section">
                 <h2 class="item-detail__section-title">商品の情報</h2>
-                <p class="item-detail__text">カテゴリー：
+                <p class="item-detail__text">
+                    <span class="item-detail__label">カテゴリー</span>
                     @foreach($item->categories as $category)
                     <span class="item-detail__category">{{ $category->name }}</span>
                     @endforeach
                 </p>
-                <p class="item-detail__text">商品の状態：{{ $item->status->name }}</p>
+                <p class="item-detail__text">
+                    <span class="item-detail__label">商品の状態</span>
+                    <span class="item-detail__value">{{ $item->status->name }}</span>
+                </p>
             </div>
 
             <div class="item-detail__section">
                 <h2 class="item-detail__section-title">コメント（{{ $item->comments_count }}）</h2>
                 @foreach ($item->comments as $comment)
                 <div class="item-detail__comment">
-                    <div class="item-detail__comment-user">{{ $comment->user->name }}</div>
-                    <p class="item-detail__comment-text">{{ $comment->comment }}</p>
+                    <div class="item-detail__comment-header">
+                        <div class="item-detail__comment-avatar">
+                            <img src="{{ asset('storage/users/' . $comment->user->image_path) }}" alt="ユーザー画像"class="item-detail__comment-avatar-image">
+                        </div>
+                        <div class="item-detail__comment-user">{{ $comment->user->name }}</div>
+                    </div>
+                    <div class="item-detail__comment-body">
+                        <p class="item-detail__comment-text">{{ $comment->comment }}</p>
+                    </div>
                 </div>
                 @endforeach
 
@@ -63,6 +73,9 @@
                     @csrf
                     <input type="hidden" name="item_id" value="{{ $item->id }}">
                     <p class="item-detail__form-title">商品へのコメント</p> <textarea name="comment" class="item-detail__textarea"></textarea>
+                    @error('comment')
+                    <p class="comment__error">{{ $message }}</p>
+                    @enderror
                     <button type="submit" class="item-detail__submit-btn">コメントを送信する</button>
                 </form>
             </div>
