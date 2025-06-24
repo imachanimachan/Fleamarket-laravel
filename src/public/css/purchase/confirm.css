@@ -14,12 +14,6 @@
 	flex: 1;
 }
 
-.flash-message{
-	font-size: 30px;
-	color:#f88;
-	margin-bottom: 20px;
-}
-
 .purchase-confirm__right {
 	width: 360px;
 }
@@ -205,4 +199,5 @@
 .purchase-confirm__error{
 	color: #ff6b6b;
 	font-weight: bold;
+	margin-left: 100px;
 }

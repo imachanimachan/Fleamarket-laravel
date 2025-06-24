@@ -44,8 +44,9 @@
 }
 
 .item-detail__brand {
-	color: #666;
+	color: #2e2d2d;
 	margin-bottom: 2px;
+	font-size: 20px;
 }
 
 .item-detail__price {

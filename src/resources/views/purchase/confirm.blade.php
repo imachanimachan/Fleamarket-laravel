@@ -8,11 +8,6 @@
 <div class="purchase-confirm">
     <div class="purchase-confirm__container">
         <div class="purchase-confirm__left">
-            @if (session('message'))
-            <div class="flash-message">
-                {{ session('message') }}
-            </div>
-            @endif
             <div class="purchase-confirm__product">
                 <div class="purchase-confirm__image">
                     <img src="{{ asset('storage/items/' . $item->image_path) }}" alt="{{ $item->name }}" class="purchase-confirm__image-img">
@@ -79,7 +74,7 @@
                     @endif
                 </div>
             </div>
-            <form action="{{ route('item.order', ['id' => $item->id]) }}" method="POST">
+            <form action="{{ route('stripe.session', ['id' => $item->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <input type="hidden" name="payment_method" value="{{ request('payment_method') }}">

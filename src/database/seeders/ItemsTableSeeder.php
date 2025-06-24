@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Item;
 use App\Models\Status;
+use App\Models\User;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -15,6 +16,7 @@ class ItemsTableSeeder extends Seeder
     public function run(): void
     {
         $statuses = Status::pluck('id', 'name');
+        $userId = User::first()->id ?? User::factory()->create()->id;
 
         $items = [
 
@@ -25,7 +27,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'status_id' => $statuses['良好'],
-                'user_id' => '1',
+                'user_id' => $userId,
 
             ],
 
@@ -36,7 +38,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '高速で信頼性の高いハードディスク',
                 'status_id' => $statuses['目立った傷や汚れなし'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -46,7 +48,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'status_id' => $statuses['やや傷や汚れあり'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -56,7 +58,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => 'クラシックなデザインの革靴',
                 'status_id' => $statuses['状態が悪い'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -66,7 +68,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '高性能なノートパソコン',
                 'status_id' => $statuses['良好'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -76,7 +78,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '高音質のレコーディング用マイク',
                 'status_id' => $statuses['目立った傷や汚れなし'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -86,7 +88,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => 'おしゃれなショルダーバッグ',
                 'status_id' => $statuses['やや傷や汚れあり'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -96,7 +98,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '使いやすいタンブラー',
                 'status_id' => $statuses['状態が悪い'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -106,7 +108,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '手動のコーヒーミル',
                 'status_id' => $statuses['良好'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
 
             [
@@ -116,7 +118,7 @@ class ItemsTableSeeder extends Seeder
                 'brand' => null,
                 'description' => '便利なメイクアップセット',
                 'status_id' => $statuses['目立った傷や汚れなし'],
-                'user_id' => '1',
+                'user_id' => $userId,
             ],
         ];
 

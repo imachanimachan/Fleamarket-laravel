@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
@@ -21,13 +20,11 @@ class LoginController extends Controller
         }
         $user = Auth::user();
 
-        // 🔒 メール未認証ならログアウトしてエラー
+        // 🔒 メール未認証ならログアウトして/email/verifyにリダイレクト
         if (!($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail) || !$user->hasVerifiedEmail()) {
             Auth::logout();
 
-            throw ValidationException::withMessages([
-                'email' => ['メールアドレスが確認されていません。メールを確認してください。'],
-            ]);
+            return redirect('/email/verify');
         }
 
         $request->session()->regenerate();

@@ -27,7 +27,7 @@ class ItemController extends Controller
         if ($tab === 'mylist') {
 
             if ($user) {
-                $items = $user->likedItems()->with('order')->keywordSearch($keyword)->get();
+                $items = $user->likedItems()->where('items.user_id', '!=', $user->id)->with('order')->keywordSearch($keyword)->get();
             } else {
                 $items = collect();
             }
@@ -78,14 +78,13 @@ class ItemController extends Controller
             return redirect()->back();
     }
 
-    public function comment(CommentRequest $request)
+    public function comment(CommentRequest $request, $id)
     {
-        $user = Auth::user();
-        $commentData = $request->only('comment', 'item_id');
-        $commentData['user_id'] = $user->id;
-
-        Comment::create($commentData);
-
+        Comment::create([
+            'user_id' => Auth::id(),
+            'item_id' => $id,
+            'comment' => $request->input('comment'),
+        ]);
         return redirect()->back();
     }
 }

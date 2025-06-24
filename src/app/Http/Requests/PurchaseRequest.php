@@ -50,12 +50,8 @@ class PurchaseRequest extends FormRequest
 
     public function getRedirectUrl()
     {
-        $itemId = $this->input('item_id');
-        $paymentMethod = $this->input('payment_method');
+        $id = $this->route('id') ?? $this->input('item_id');
 
-        return route('item.purchase', [
-            'id' => $itemId,
-            'payment_method' => $paymentMethod,
-        ]);
+        return route('item.purchase', ['id' => $id]);
     }
 }

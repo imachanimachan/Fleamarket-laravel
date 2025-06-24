@@ -4,9 +4,12 @@ namespace App\Models;
 
 use COM;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Item extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'price',
@@ -47,7 +50,7 @@ class Item extends Model
 
     public function order()
     {
-        return $this->hasOne(Order::class); // 注文情報が1件なら hasOne
+        return $this->hasOne(Order::class);
     }
 
     public function getIsSoldAttribute(): bool

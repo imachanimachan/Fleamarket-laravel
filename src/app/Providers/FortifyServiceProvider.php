@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LoginResponse;
 use Laravel\Fortify\Contracts\RegisterResponse;
+use Illuminate\Support\Facades\Auth;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -47,16 +48,15 @@ class FortifyServiceProvider extends ServiceProvider
         new class implements RegisterResponse {
             public function toResponse($request)
             {
-                return redirect('/email/verify');
+                return redirect('/login');
             }
         });
-
 
         app()->singleton(LoginResponse::class, fn() =>
         new class implements LoginResponse {
             public function toResponse($request)
             {
-                return redirect('/');
+                return redirect('/'); // ← 任意（ログイン時の通常リダイレクト先）
             }
         });
     }

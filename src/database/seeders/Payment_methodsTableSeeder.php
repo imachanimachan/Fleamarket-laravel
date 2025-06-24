@@ -13,10 +13,14 @@ class Payment_methodsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $names = ["コンビニ支払い", "カード支払い"];
+        PaymentMethod::create([
+            'id' => 1,
+            'name' => 'コンビニ支払い'
+        ]);
 
-        foreach ($names as $name) {
-            PaymentMethod::create(['name' => $name]);
-        }
+        PaymentMethod::create([
+            'id' => 2,
+            'name' => 'カード支払い'
+        ]);
     }
 }

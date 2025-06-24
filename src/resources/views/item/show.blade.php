@@ -12,7 +12,7 @@
         </div>
         <div class="item-detail__info-box">
             <h1 class="item-detail__name">{{ $item->name }}</h1>
-            <p class="item-detail__brand">{{ $item->brand_name }}</p>
+            <p class="item-detail__brand">{{ $item->brand }}</p>
             <p class="item-detail__price">¥{{ number_format($item->price) }} <span class="item-detail__tax">(税込)</span></p>
 
             <div class="item-detail__actions">
@@ -71,7 +71,6 @@
                 {{-- コメント投稿フォーム --}}
                 <form action="{{ route('item.comment', ['id' => $item->id]) }}" method="POST" class="item-detail__comment-form">
                     @csrf
-                    <input type="hidden" name="item_id" value="{{ $item->id }}">
                     <p class="item-detail__form-title">商品へのコメント</p> <textarea name="comment" class="item-detail__textarea"></textarea>
                     @error('comment')
                     <p class="comment__error">{{ $message }}</p>
