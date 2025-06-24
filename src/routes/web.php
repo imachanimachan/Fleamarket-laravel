@@ -60,7 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/purchase/address/{id}', [PurchaseController::class, 'update'])->name('update.address');
     Route::post('/stripe/session/{id}', [StripeController::class, 'createSession'])->name('stripe.session');
     Route::get('/purchase/success', [StripeController::class, 'success'])->name('purchase.success');
-    Route::get('/purchase/cancel', [StripeController::class, 'cancel'])->name('purchase.cancel');
     Route::get('/sell', [SellController::class, 'sell']);
     Route::post('/sell', [SellController::class, 'create']);
 });
