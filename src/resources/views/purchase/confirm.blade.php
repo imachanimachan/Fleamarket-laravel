@@ -26,8 +26,8 @@
                     <label for="payment_method" class="purchase-confirm__payment-label">支払い方法</label>
                     <select id="payment_method" class="purchase-confirm__payment-select" name="payment_method" onchange="this.form.submit()">
                         <option>選択してください</option>
-                        <option value="convenience" {{ request('payment_method') === 'convenience' ? 'selected' : ''  }}>コンビニ払い</option>
-                        <option value="card" {{ request('payment_method') === 'card' ? 'selected' : '' }}>カード払い</option>
+                        <option value="convenience" {{ request('payment_method') === 'convenience' ? 'selected' : ''  }}>コンビニ支払い</option>
+                        <option value="card" {{ request('payment_method') === 'card' ? 'selected' : '' }}>カード支払い</option>
                     </select>
                     @if ($errors->has('payment_method'))
                     <p class="purchase-confirm__error">{{ $errors->first('payment_method') }}</p>
@@ -66,9 +66,9 @@
                 <div class="purchase-confirm__row">
                     <span class="purchase-confirm__row-label">支払い方法</span>
                     @if(request('payment_method') === 'card')
-                    <span class="purchase-confirm__row-value">カード払い</span>
+                    <span class="purchase-confirm__row-value">カード支払い</span>
                     @elseif(request('payment_method') === 'convenience')
-                    <span class="purchase-confirm__row-value">コンビニ払い</span>
+                    <span class="purchase-confirm__row-value">コンビニ支払い</span>
                     @else
                     <span class="purchase-confirm__row-value">未選択</span>
                     @endif
