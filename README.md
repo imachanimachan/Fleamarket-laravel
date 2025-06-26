@@ -39,17 +39,22 @@ php artisan migrate
 php artisan db:seed
 ```
 
+7. シンボリックリンク作成
+``` bash
+php artisan storage:link
+```
+
 ### Stripe 決済機能について
 
 このアプリでは、Stripe を使用して「カード支払い」「コンビニ支払い」に対応しています。
 
 #### 導入手順
 
-1. Stripe のアカウントを作成する  
+1. Stripe のアカウントを作成する
    https://dashboard.stripe.com/register
 
-2. テスト用 API キーを取得する  
-   Stripe ダッシュボードから以下の情報を取得します 
+2. テスト用 API キーを取得する
+   Stripe ダッシュボードから以下の情報を取得します
    - 公開可能キー（Publishable Key）: `pk_test_xxxxx`
    - シークレットキー（Secret Key）: `sk_test_xxxxx`
 
@@ -102,12 +107,42 @@ MAIL_ENCRYPTION=null
 docker-compose up -d
 ```
 
-3. Docker 起動後、以下のURLから Mailhog にアクセスできます    
+3. Docker 起動後、以下のURLから Mailhog にアクセスできます
    http://localhost:8025
 
-### テストについて
+### テスト実行手順
 
- 以下のコマンドでテストを実行できます。
+1. テスト用データベースを作成
+
+ MySQL コンテナにログインし、demo_test データベースを作成します。
+```
+docker exec -it <mysqlコンテナ名またはID> bash
+mysql -u root -p
+CREATE DATABASE demo_test;
+```
+
+2. .env.testing の設定
+
+このリポジトリには .env.testing が含まれています。
+以下のように設定されており、テスト時に demo_test を使用するようになっています
+```
+DB_CONNECTION=mysql
+DB_DATABASE=demo_test
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+3. テスト用のアプリケーションキーを生成（初回のみ）
+```
+php artisan key:generate --env=testing
+```
+
+4. テスト用データベースにマイグレーションを実行
+```
+php artisan migrate --env=testing
+```
+
+5. テストを実行
 ```
 php artisan test
 ```
