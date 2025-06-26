@@ -13,10 +13,9 @@ class StatusesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $names = ["良好", "目立った傷や汚れなし", "やや傷や汚れあり", "状態が悪い"];
-
-        foreach ($names as $name) {
-            Status::create(['name' => $name]);
-        }
+        Status::create(['id' => 1, 'name' => '良好']);
+        Status::create(['id' => 2, 'name' => '目立った傷や汚れなし']);
+        Status::create(['id' => 3, 'name' => 'やや傷や汚れあり']);
+        Status::create(['id' => 4, 'name' => '状態が悪い']);
     }
 }

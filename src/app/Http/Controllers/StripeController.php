@@ -46,7 +46,6 @@ class StripeController extends Controller {
                 'quantity' => 1,
             ]],
             'success_url' => route('purchase.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('purchase.cancel'),
             'metadata' => [
                 'user_id' => $user->id,
                 'item_id' => $item->id,
