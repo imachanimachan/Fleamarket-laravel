@@ -105,6 +105,12 @@ docker-compose up -d
 3. Docker 起動後、以下のURLから Mailhog にアクセスできます    
    http://localhost:8025
 
+### テストについて
+
+ 以下のコマンドでテストを実行できます。
+```
+php artisan test
+```
 
 ## 使用技術(実行環境)
 - PHP8.3.0
