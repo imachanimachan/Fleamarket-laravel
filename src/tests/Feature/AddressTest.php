@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
 use Database\Seeders\DatabaseSeeder;
+use Mockery;
+use Stripe\Checkout\Session;
 
 class AddressTest extends TestCase
 {
@@ -44,6 +46,11 @@ class AddressTest extends TestCase
     /** @test */
     public function shipping_address_is_correctly_linked_to_purchased_order()
     {
+        $mock = Mockery::mock('alias:' . Session::class);
+        $mock->shouldReceive('create')
+            ->once()
+            ->andReturn((object)['url' => '/dummy-checkout']);
+
         $user = User::factory()->create();
         $this->actingAs($user);
         $item = Item::first();
@@ -78,5 +85,11 @@ class AddressTest extends TestCase
         $this->assertEquals('123-4567', $updatedUser->postcode);
         $this->assertEquals('東京都渋谷区1-2-3', $updatedUser->address);
         $this->assertEquals('アパート', $updatedUser->building);
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 }

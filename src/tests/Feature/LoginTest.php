@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginTest extends TestCase
 {
@@ -31,6 +32,6 @@ class LoginTest extends TestCase
             'password' => 'password123'
         ]);
 
-        $response->assertAuthenticatedAs($user);
+        $this->assertEquals(Auth::id(), $user->id);
     }
 }

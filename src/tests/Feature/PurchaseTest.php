@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Order;
 use Database\Seeders\DatabaseSeeder;
+use Mockery;
+use Stripe\Checkout\Session;
 
 class PurchaseTest extends TestCase
 {
@@ -23,6 +25,11 @@ class PurchaseTest extends TestCase
     /** @test */
 	public function purchase_button_creates_order_record_successfully()
 	{
+        $mock = Mockery::mock('alias:' . Session::class);
+        $mock->shouldReceive('create')
+            ->once()
+            ->andReturn((object)['url' => '/dummy-checkout']);
+
         $user = User::factory()->create([
             'postcode' => '123-4567',
             'address' => '東京都渋谷区1-2-3',
@@ -47,6 +54,11 @@ class PurchaseTest extends TestCase
     /** @test */
     public function purchased_item_is_displayed_as_sold_on_item_list()
     {
+        $mock = Mockery::mock('alias:' . Session::class);
+        $mock->shouldReceive('create')
+            ->once()
+            ->andReturn((object)['url' => '/dummy-checkout']);
+
         $user = User::factory()->create([
             'postcode' => '123-4567',
             'address' => '東京都渋谷区1-2-3',
@@ -70,6 +82,11 @@ class PurchaseTest extends TestCase
     /** @test */
     public function purchased_item_appears_in_user_purchase_list()
     {
+        $mock = Mockery::mock('alias:' . Session::class);
+        $mock->shouldReceive('create')
+            ->once()
+            ->andReturn((object)['url' => '/dummy-checkout']);
+
         $user = User::factory()->create([
             'postcode' => '123-4567',
             'address' => '東京都渋谷区1-2-3',
@@ -89,4 +106,11 @@ class PurchaseTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($item->name);
     }
+
+    protected function tearDown(): void
+    {
+        \Mockery::close();
+        parent::tearDown();
+    }
+
 }
