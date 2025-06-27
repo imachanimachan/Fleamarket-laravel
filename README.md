@@ -4,15 +4,15 @@
 ## 環境構築
 
 ### Dockerビルド
-1. git clone https://github.com/imachanimachan/Fleamarket-laravel
+1. `git clone https://github.com/imachanimachan/Fleamarket-laravel`
 2. DockerDesktopアプリを立ち上げる
-3. docker-compose up -d --build
+3. `docker-compose up -d --build`
 
 
 ### laravel環境構築
 
-1. docker-compose exec php bash
-2. composer install
+1. `docker-compose exec php bash`
+2. `composer install`
 3. .env.exampleファイルから.envを作成し、以下の環境変数を追加
 ```
 cp .env.example .env
