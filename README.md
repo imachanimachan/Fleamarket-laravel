@@ -4,7 +4,7 @@
 ## 環境構築
 
 ### Dockerビルド
-1. https://github.com/imachanimachan/Fleamarket-laravel
+1. git clone https://github.com/imachanimachan/Fleamarket-laravel
 2. DockerDesktopアプリを立ち上げる
 3. docker-compose up -d --build
 
