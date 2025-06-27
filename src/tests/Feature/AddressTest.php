@@ -69,7 +69,7 @@ class AddressTest extends TestCase
 
         $response = $this->get(route('item.purchase', ['id' => $item->id, 'payment_method' => 'convenience']));
         $response->assertStatus(200);
-        $response->assertSee('コンビニ払い');
+        $response->assertSee('コンビニ支払い');
 
         $response = $this->post(route('stripe.session', ['id' => $item->id]), [
             'item_id' => $item->id,

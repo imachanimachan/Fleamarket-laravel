@@ -29,6 +29,6 @@ class Payment_methodTest extends TestCase
         $response = $this->get(route('item.purchase', ['id' => $item->id, 'payment_method' => 'convenience']));
 
         $response->assertStatus(200);
-        $response->assertSee('コンビニ払い');
+        $response->assertSee('コンビニ支払い');
     }
 }
