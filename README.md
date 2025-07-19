@@ -154,6 +154,16 @@ php artisan test
 ## ER図
 ![alt](index.drawio.png)
 
+## テーブル設計
+![テーブル設計](./images/thumbnail_image0.jpg)
+![テーブル設計](./images/thumbnail_image1.jpg)
+![テーブル設計](./images/thumbnail_image2.jpg)
+![テーブル設計](./images/thumbnail_image3.jpg)
+![テーブル設計](./images/thumbnail_image4.jpg)
+![テーブル設計](./images/image7.jpeg)
+![テーブル設計](./images/image8.jpeg)
+![テーブル設計](./images/image9.jpeg)
+
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin：http://localhost:8080/
