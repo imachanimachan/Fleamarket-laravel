@@ -15,7 +15,9 @@
     <header class="top-header">
         <div class="top-header__inner">
             <div class="top-header__logo">
-                <img src="{{ asset('storage/logo/logo.svg') }}" alt="COACHTECH" class="top-header__logo-img">
+                <a href="/">
+                    <img src="{{ asset('storage/logo/logo.svg') }}" alt="COACHTECH" class="top-header__logo-img">
+                </a>
             </div>
             <form class="top-header__search-form" action="/" method="GET">
                 @csrf
