@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\ProfileRequest;
@@ -12,7 +13,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('mypage.edit',compact('user'));
+        return view('mypage.edit', compact('user'));
     }
 
     public function update(ProfileRequest $request)
@@ -20,8 +21,8 @@ class ProfileController extends Controller
         $user = Auth::user();
         $form = $request->all();
 
-        if($request->hasFile('image_path')){
-            $path = $request->file('image_path')->store('users','public');
+        if ($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('users', 'public');
             $form['image_path'] = basename($path);
         }
 
@@ -37,15 +38,26 @@ class ProfileController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
-        $tab = $request->query('tab');
+        $tab = $request->query('tab', 'sell');
 
         if ($tab === 'buy') {
             $items = $user->orders()->with('item')->get()->pluck('item');
 
-        } else {
-            $items= $user->items;
-        }
+        } elseif ($tab === 'trade') {
 
-        return view('mypage.index',compact('user','items'));
+            $items = Item::whereHas('order', function ($q) use ($user) {
+                $q->where('user_id', $user->id);
+            })
+                ->orWhere(function ($q) use ($user) {
+                    $q->where('user_id', $user->id)
+                        ->whereHas('order');
+                })
+                ->get();
+
+        } else {
+
+            $items = $user->items;
+        }
+        return view('mypage.index', compact('user', 'items'));
     }
 }

@@ -1,0 +1,182 @@
+.trade {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.trade__container {
+	width: 100%;
+	max-width: 1540px;
+	display: flex;
+}
+
+.trade__sidebar {
+	width: 260px;
+	background-color: #8e8e8e;
+	padding: 24px;
+}
+
+.trade__sidebar-title {
+	color: #ffffff;
+	margin-bottom: 16px;
+}
+
+.trade__item-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.trade__item {
+	background-color: #ffffff;
+	padding: 8px;
+	text-align: center;
+	border-radius: 4px;
+}
+
+.trade__main {
+	flex: 1;
+	background-color: #ffffff;
+}
+
+.trade__header {
+	padding: 16px 24px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.trade__user {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.trade__user-icon {
+	width: 40px;
+	height: 40px;
+	background-color: #cccccc;
+	border-radius: 50%;
+}
+
+.trade__user-name {
+	font-weight: bold;
+}
+
+.trade__product {
+	display: flex;
+	gap: 24px;
+	padding: 24px;
+	border-bottom: 1px solid #cccccc;
+}
+
+.trade__product-image {
+	width: 120px;
+	height: 120px;
+	background-color: #e0e0e0;
+}
+
+.trade__product-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 8px;
+}
+
+.trade__product-name {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.trade__product-price {
+	color: #555555;
+}
+
+.trade__chat {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.trade__message {
+	display: flex;
+	gap: 12px;
+}
+
+.trade__message--self {
+	justify-content: flex-end;
+}
+
+.trade__message-icon {
+	width: 32px;
+	height: 32px;
+	background-color: #cccccc;
+	border-radius: 50%;
+}
+
+.trade__message-body {
+	max-width: 60%;
+}
+
+.trade__message-user {
+	margin-bottom: 4px;
+}
+
+.trade__message-user--right {
+	text-align: right;
+}
+
+.trade__message-text {
+	background-color: #e0e0e0;
+	padding: 12px;
+	border-radius: 4px;
+}
+
+.trade__message-text--self {
+	background-color: #d9d9d9;
+}
+
+.trade__message-actions {
+	margin-top: 4px;
+	text-align: right;
+	font-size: 12px;
+	color: #777777;
+}
+
+.trade__form {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px 24px;
+	border-top: 1px solid #cccccc;
+}
+
+.trade__input {
+	flex: 1;
+	padding: 8px;
+}
+
+.trade__image-button {
+	border: 1px solid #ff5555;
+	color: #ff5555;
+	background-color: transparent;
+	padding: 6px 12px;
+	border-radius: 4px;
+}
+
+.trade__send-button {
+	background-color: transparent;
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+/* タブレット対応 */
+@media screen and (max-width: 850px) {
+	.trade__container {
+		flex-direction: column;
+	}
+
+	.trade__sidebar {
+		width: 100%;
+	}
+}

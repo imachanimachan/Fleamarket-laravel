@@ -15,11 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $user1 = User::factory()->create([
+            'name' => 'User One',
+            'email' => 'user1@example.com',
+            'password' => bcrypt('password123'),
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $user2 = User::factory()->create([
+            'name' => 'User Two',
+            'email' => 'user2@example.com',
+            'password' => bcrypt('password123'),
+
+        ]);
+
+        $user3 = User::factory()->create([
+            'name' => 'User Three',
+            'email' => 'user3@example.com',
+            'password' => bcrypt('password123'),
+
         ]);
 
         $this->call(StatusesTableSeeder::class);
