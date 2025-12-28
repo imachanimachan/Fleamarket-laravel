@@ -7,7 +7,7 @@
 @section('content')
 <div class="item-list">
     <div class="item-list__tab">
-        <a href="{{ url('/') }}?tab=recommend&keyword={{ $keyword }}" class="item-list__tab-link {{ $tab === 'recommend' ? 'item-list__tab-link--active' : '' }}">おすすめ</a>
+        <a href="{{ url('/') }}?tab=recommend&keyword={{ $keyword }}" class="item-list__tab-link {{ $tab === 'recommend' ? 'item-list__tab-link--active' : '' }}">おすすめです</a>
         <a href="{{ url('/') }}?tab=mylist&keyword={{ $keyword }}" class="item-list__tab-link {{ $tab === 'mylist' ? 'item-list__tab-link--active' : '' }}">マイリスト</a>
     </div>
 
