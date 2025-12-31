@@ -60,5 +60,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/success', [StripeController::class, 'success'])->name('purchase.success');
     Route::get('/sell', [SellController::class, 'sell']);
     Route::post('/sell', [SellController::class, 'create']);
-        Route::get('/trades', [TradeController::class, 'index'])->name('trade.index');
+    Route::get('/trades/{id}', [TradeController::class, 'index'])->name('trade.index');
+    Route::post('/trade/{id}/message', [TradeController::class, 'store'])
+        ->name('trade.message.store');
+    Route::delete('/messages/{message}', [TradeController::class, 'destroy'])
+        ->name('messages.destroy');
+    Route::get('/messages/{message}/edit', [TradeController::class, 'edit'])
+        ->name('messages.edit');
+    Route::put('/messages/{message}', [TradeController::class, 'update'])
+        ->name('messages.update');
 });

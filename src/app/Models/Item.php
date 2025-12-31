@@ -53,6 +53,21 @@ class Item extends Model
         return $this->hasOne(Order::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+
     public function getIsSoldAttribute(): bool
     {
         return $this->order !== null;

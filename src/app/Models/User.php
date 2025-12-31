@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Item;
+use App\Models\Review;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -48,8 +49,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Order::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 
+    public function givenReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewer_id');
+    }
 
+    public function receivedReviews()
+    {
+        return $this->hasMany(Review::class, 'reviewed_user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

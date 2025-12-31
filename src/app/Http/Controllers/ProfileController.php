@@ -40,6 +40,15 @@ class ProfileController extends Controller
 
         $tab = $request->query('tab', 'sell');
 
+        $tradeCount = Item::whereHas('order', function ($q) use ($user) {
+            $q->where('user_id', $user->id);
+        })
+            ->orWhere(function ($q) use ($user) {
+                $q->where('user_id', $user->id)
+                    ->whereHas('order');
+            })
+            ->count();
+
         if ($tab === 'buy') {
             $items = $user->orders()->with('item')->get()->pluck('item');
 
@@ -52,12 +61,17 @@ class ProfileController extends Controller
                     $q->where('user_id', $user->id)
                         ->whereHas('order');
                 })
-                ->get();
+                ->withCount([
+                    'messages as notify_count' => function ($q) use ($user) {
+                        $q->where('user_id', '!=', $user->id)
+                            ->whereNull('read_at');
+                    }
+                ])                ->get();
 
         } else {
 
             $items = $user->items;
         }
-        return view('mypage.index', compact('user', 'items'));
+        return view('mypage.index', compact('user', 'items', 'tradeCount'));
     }
 }

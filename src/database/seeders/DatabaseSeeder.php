@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         $user1 = User::factory()->create([
             'name' => 'User One',
+            'image_path' => '8syhhy13VwPlOmfSwLBh7MxU1iEhLlkv7UOt5Umc.png',
             'email' => 'user1@example.com',
             'password' => bcrypt('password123'),
         ]);
 
         $user2 = User::factory()->create([
             'name' => 'User Two',
+            'image_path' => 'bIbso8sXVqBDHG25UNICUnrsLo7vnO1hQd5BK5in.jpg',
             'email' => 'user2@example.com',
             'password' => bcrypt('password123'),
 
@@ -30,6 +32,7 @@ class DatabaseSeeder extends Seeder
 
         $user3 = User::factory()->create([
             'name' => 'User Three',
+            'image_path' => 'Zl62KsNuQPg3GFUoms8SzVMMDSxXHyqN1UczgUUg.png',
             'email' => 'user3@example.com',
             'password' => bcrypt('password123'),
 

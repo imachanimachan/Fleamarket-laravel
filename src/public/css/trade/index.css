@@ -1,182 +1,274 @@
 .trade {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
 }
 
 .trade__container {
-	width: 100%;
-	max-width: 1540px;
-	display: flex;
+    width: 100%;
+    max-width: 1540px;
+    display: flex;
 }
 
 .trade__sidebar {
-	width: 260px;
-	background-color: #8e8e8e;
-	padding: 24px;
+    width: 260px;
+    background-color: #8e8e8e;
+    padding: 24px;
 }
 
 .trade__sidebar-title {
-	color: #ffffff;
-	margin-bottom: 16px;
+    color: #ffffff;
+    margin-bottom: 16px;
 }
 
 .trade__item-list {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.trade__item {
-	background-color: #ffffff;
-	padding: 8px;
-	text-align: center;
-	border-radius: 4px;
-}
-
-.trade__main {
-	flex: 1;
-	background-color: #ffffff;
-}
-
-.trade__header {
-	padding: 16px 24px;
-	border-bottom: 1px solid #cccccc;
-}
-
-.trade__user {
-	display: flex;
-	align-items: center;
-	gap: 12px;
+.trade__item-link {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .trade__user-icon {
-	width: 40px;
-	height: 40px;
-	background-color: #cccccc;
-	border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.trade-message__icon {
+    width: 50px;
+    height: 50px;
+}
+
+.trade__user-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.item-card__image {
+    width: 50px;
+    height: 50px;
+}
+
+.item-card__image img {
+    width: 100%;
+    height: 100%;
+}
+
+.trade__item {
+    background-color: #ffffff;
+    padding: 8px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.trade__main {
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.trade__header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.trade__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.trade__user-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #cccccc;
+    border-radius: 50%;
 }
 
 .trade__user-name {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .trade__product {
-	display: flex;
-	gap: 24px;
-	padding: 24px;
-	border-bottom: 1px solid #cccccc;
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    border-bottom: 1px solid #cccccc;
 }
 
 .trade__product-image {
-	width: 120px;
-	height: 120px;
-	background-color: #e0e0e0;
+    width: 120px;
+    height: 120px;
+    background-color: #e0e0e0;
 }
 
 .trade__product-info {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
 }
 
 .trade__product-name {
-	font-size: 20px;
-	font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .trade__product-price {
-	color: #555555;
+    color: #555555;
 }
 
 .trade__chat {
-	padding: 24px;
-	display: flex;
-	flex-direction: column;
-	gap: 24px;
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
 }
 
 .trade__message {
-	display: flex;
-	gap: 12px;
+    display: flex;
+    overflow-y: auto;
+    gap: 12px;
 }
 
 .trade__message--self {
-	justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 .trade__message-icon {
-	width: 32px;
-	height: 32px;
-	background-color: #cccccc;
-	border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    background-color: #cccccc;
+    border-radius: 50%;
 }
 
 .trade__message-body {
-	max-width: 60%;
+    max-width: 60%;
 }
 
 .trade__message-user {
-	margin-bottom: 4px;
+    margin-bottom: 4px;
 }
 
 .trade__message-user--right {
-	text-align: right;
+    text-align: right;
 }
 
 .trade__message-text {
-	background-color: #e0e0e0;
-	padding: 12px;
-	border-radius: 4px;
+    background-color: #e0e0e0;
+    padding: 12px;
+    border-radius: 4px;
 }
 
 .trade__message-text--self {
-	background-color: #d9d9d9;
+    background-color: #d9d9d9;
 }
 
 .trade__message-actions {
-	margin-top: 4px;
-	text-align: right;
-	font-size: 12px;
-	color: #777777;
+    margin-top: 4px;
+    text-align: right;
+    font-size: 12px;
+    color: #777777;
 }
 
 .trade__form {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 16px 24px;
-	border-top: 1px solid #cccccc;
+    position: sticky;
+    bottom: 0;
+    background-color: #ffffff; /* 背景色必須、透けないように */
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid #cccccc;
 }
 
 .trade__input {
-	flex: 1;
-	padding: 8px;
+    flex: 1;
+    padding: 8px;
 }
 
 .trade__image-button {
-	border: 1px solid #ff5555;
-	color: #ff5555;
-	background-color: transparent;
-	padding: 6px 12px;
-	border-radius: 4px;
+    border: 1px solid #ff5555;
+    color: #ff5555;
+    background-color: transparent;
+    padding: 6px 12px;
+    border-radius: 4px;
 }
 
 .trade__send-button {
-	background-color: transparent;
-	border: none;
-	font-size: 20px;
-	cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.trade__message {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+/* 相手のメッセージ：左寄せ */
+.trade__message--other {
+    justify-content: flex-start;
+}
+
+/* 自分のメッセージ：右寄せ */
+.trade__message--self {
+    justify-content: flex-end;
+}
+
+/* メッセージ本文 */
+.trade__message-text {
+    background-color: #e0e0e0;
+    padding: 12px;
+    border-radius: 4px;
+    max-width: 60%;
+}
+
+/* 自分のメッセージ本文の色 */
+.trade__message--self .trade__message-text {
+    background-color: #d9d9d9;
+}
+
+/* アイコンサイズ */
+.trade__user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.trade__user-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.trade__message-image {
+    width: 50px;
+    height: 50px;
 }
 
 /* タブレット対応 */
 @media screen and (max-width: 850px) {
-	.trade__container {
-		flex-direction: column;
-	}
+    .trade__container {
+        flex-direction: column;
+    }
 
-	.trade__sidebar {
-		width: 100%;
-	}
+    .trade__sidebar {
+        width: 100%;
+    }
 }

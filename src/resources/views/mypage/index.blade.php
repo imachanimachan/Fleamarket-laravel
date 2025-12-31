@@ -26,6 +26,11 @@
             <a href="/mypage?tab=trade"
                 class="item-list__tab-link {{ request('tab') === 'trade' ? 'item-list__tab-link--active' : '' }}">
                 取引中の商品
+                @if($tradeCount > 0)
+                    <span class="item-list__badge">
+                        {{ $tradeCount }}
+                    </span>
+                @endif
             </a>
 
         </div>
@@ -33,8 +38,13 @@
         <div class="item-list__grid">
             @foreach ($items as $item)
                 <div class="item-card">
+                    @if (request('tab') === 'trade' && $item->notify_count > 0)
+                        <span class="notification-count__badge">
+                            {{ $item->notify_count }}
+                        </span>
+                    @endif
                     @if (request('tab') === 'trade')
-                        <a href="{{ route('trade.index') }}">
+                        <a href="{{ route('trade.index', ['id' => $item->id]) }}">
                     @else
                             <a href="{{ route('item.show', ['id' => $item->id]) }}">
                         @endif
