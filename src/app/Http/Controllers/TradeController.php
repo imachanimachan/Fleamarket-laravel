@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Message;
+use App\Models\Review;
 use App\Http\Requests\ChatMessageRequest;
 
 class TradeController extends Controller
@@ -32,12 +33,15 @@ class TradeController extends Controller
             'user',
         ])
             ->where(function ($q) use ($user) {
-                $q->whereHas('order', function ($q) use ($user) {
-                    $q->where('user_id', $user->id);
+                $q->whereHas('order', function ($q2) use ($user) {
+                    $q2->where('user_id', $user->id)
+                        ->where('buyer_completed', false);
                 })
-                    ->orWhere(function ($q) use ($user) {
-                        $q->where('user_id', $user->id)
-                            ->whereHas('order');
+                    ->orWhere(function ($q2) use ($user) {
+                        $q2->where('user_id', $user->id)
+                            ->whereHas('order', function ($q3) use ($user) {
+                                $q3->where('seller_completed', false);
+                            });
                     });
             })
             ->withMax('messages', 'created_at')
@@ -140,5 +144,46 @@ class TradeController extends Controller
 
         return redirect()->route('trade.index', $message->item_id);
     }
+
+    public function complete(Item $item)
+    {
+        $user = Auth::user();
+        $order = $item->order;
+        if ($order->user_id !== $user->id && $item->user_id !== $user->id) {
+            abort(403);
+        }
+        if ($user->id === $order->user_id) {
+            $order->update([
+                'buyer_completed' => true,
+            ]);
+        } elseif ($user->id === $item->user_id) {
+            $order->update([
+                'seller_completed' => true,
+            ]);
+        }
+        return redirect()
+            ->route('trade.index', ['id' => $item->id])
+            ->with('showReviewModal', true);
+    }
+
+
+    public function storeReview(Request $request)
+    {
+        $request->validate([
+            'item_id' => 'required|exists:items,id',
+            'reviewed_user_id' => 'required|exists:users,id',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        Review::create([
+            'item_id' => $request->item_id,
+            'reviewer_id' => Auth::id(),
+            'reviewed_user_id' => $request->reviewed_user_id,
+            'rating' => $request->rating,
+        ]);
+
+        return redirect()->route('mypage.index');
+    }
+
 }
 

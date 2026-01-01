@@ -40,6 +40,21 @@
                         </div>
                         <p class="trade__user-name">「{{ $tradeUser->name }}」さんとの取引画面</p>
                     </div>
+                    @php
+                        $order = $currentItem->order;
+                        $isBuyer = Auth::id() === $order->user_id;
+                        $isSeller = Auth::id() === $currentItem->user_id;
+                    @endphp
+
+                    @if (($isBuyer && !$order->buyer_completed) || ($isSeller && $order->buyer_completed && !$order->seller_completed))
+                        <form method="POST" action="{{ route('trade.complete', ['item' => $currentItem->id]) }}">
+                            @csrf
+                            <button type="submit" class="trade__complete-button">
+                                取引を完了する
+                            </button>
+                        </form>
+                    @endif
+
                 </div>
 
                 <div class="trade__product">
@@ -136,6 +151,31 @@
 
             <button class="trade__send-button" type="submit">▶</button>
         </form>
+        @if (session('showReviewModal'))
+            <div class="review-modal">
+                <div class="review-modal__content">
+                    <h2>取引の評価</h2>
+
+                    <form method="POST" action="{{ route('reviews.store') }}">
+                        @csrf
+                        <input type="hidden" name="item_id" value="{{ $currentItem->id }}">
+                        <input type="hidden" name="reviewed_user_id" value="{{ $tradeUser->id }}">
+
+                        <div class="review-modal__stars">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <label>
+                                    <input type="radio" name="rating" value="{{ $i }}" required>
+                                    ★
+                                </label>
+                            @endfor
+                        </div>
+
+                        <button type="submit">評価を送信</button>
+                    </form>
+                </div>
+            </div>
+        @endif
+
     </div>
     </div>
     </div>

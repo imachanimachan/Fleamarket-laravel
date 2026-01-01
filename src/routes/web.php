@@ -48,7 +48,7 @@ Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{id}', [ItemController::class, 'show'])->name('item.show');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/mypage', [ProfileController::class, 'index']);
+    Route::get('/mypage', [ProfileController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/profile', [ProfileController::class, 'edit']);
     Route::patch('/mypage/profile', [ProfileController::class, 'update']);
     Route::post('/item/{id}/like', [ItemController::class, 'toggleLike'])->name('item.like');
@@ -69,4 +69,8 @@ Route::middleware('auth')->group(function () {
         ->name('messages.edit');
     Route::put('/messages/{message}', [TradeController::class, 'update'])
         ->name('messages.update');
+    Route::post('/trade/{item}/complete', [TradeController::class, 'complete'])
+        ->name('trade.complete');
+    Route::post('/reviews', [TradeController::class, 'storeReview'])
+        ->name('reviews.store');
 });
