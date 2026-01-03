@@ -14,13 +14,11 @@ class Order extends Model
         'item_id',
         'payment_method_id',
         'paid_at',
-        'is_completed',
         'buyer_completed',
         'seller_completed',
     ];
 
     protected $casts = [
-        'is_completed' => 'boolean',
         'buyer_completed' => 'boolean',
         'seller_completed' => 'boolean',
     ];
