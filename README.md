@@ -89,8 +89,6 @@ composer require stripe/stripe-php
 このアプリでは、メール認証が完了しないとログインできない仕様になっています。
 Mailhog を使用してメールの確認を行います。
 
-また、購入者が取引を完了すると出品者に対して自動でメールが送信される仕様になっています。
-
 #### Mailhog
 
 Mailhog はこのプロジェクトに Docker コンテナとして組み込まれており、インストールする必要はありません。
@@ -114,6 +112,10 @@ docker-compose up -d
 
 3. Docker 起動後、以下のURLから Mailhog にアクセスできます
    http://localhost:8025
+
+### 自動メール送信について
+取引チャット画面で購入者が取引を完了すると出品者に対して自動でメールが送信される仕様になっています。
+
 
 ### テスト実行手順
 
@@ -159,19 +161,19 @@ php artisan test
 
 ## ダミーデータについて
 今回は3つのユーザーデータを作成しています。
-- User One
-CO01～CO05までの商品を出品
-email : user1@example.com
+- User One  
+CO01～CO05までの商品を出品  
+email : user1@example.com  
 password : password123
 
-- User Two
-CO06～CO010までの商品を出品
-email : user2@example.com
+- User Two  
+CO06～CO010までの商品を出品  
+email : user2@example.com  
 password : password123
 
-- User Three
-何も紐づけられていないユーザー
-email : user3@example.com
+- User Three  
+何も紐づけられていないユーザー  
+email : user3@example.com  
 password : password123
 
 ## ER図
