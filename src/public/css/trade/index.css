@@ -40,6 +40,7 @@
     width: 260px;
     background-color: #8e8e8e;
     padding: 24px 16px;
+    min-height: 610px;
 }
 
 .trade__sidebar-title {
@@ -358,6 +359,7 @@
 
     .trade__sidebar {
         width: 100%;
+        min-height: auto;
     }
 
     .trade__product {
