@@ -1,46 +1,7 @@
 # フリマアプリ（Fleamarket-laravel）
 Laravel + Docker を使用して構築した、簡易フリマアプリです。
 ユーザーは商品を出品・購入でき、Stripeによる決済機能やメール認証も備えています。
-
-## 実装機能
-
-- ユーザー登録
-  - ユーザー登録 / ログイン（メール認証あり）
-  - マイページ（購入商品 / 出品商品をタブで切り替え表示）
-  - マイリスト（いいねした商品一覧）
-
-- 商品関連
-  - 商品一覧ページ（おすすめ / マイリストのタブ切り替え）
-  - 商品検索（キーワード検索）
-  - 商品詳細ページ (いいね機能・コメント投稿機能)
-  - 商品の出品
-
-- 購入機能（Stripe決済）
-  - カード支払い（テストカード対応）
-  - コンビニ支払い(テスト)
-
-- その他
-  - シーディングによる初期データ登録
-  - テストコードによる自動テスト
-  - バリデーション機能
-
-## 画面キャプチャ
-
-### 商品一覧画面
-![商品一覧](./images/product_list.png)
-
-### 商品詳細画面
-![商品詳細](./images/product_detail.png)
-
-### 商品購入画面
-![商品購入](./images/purchase_confirm.png)
-
-### 商品出品画面
-![商品出品](./images/product_create.png)
-
-### マイページ
-![マイページ](./images/mypage.png)
-
+また、取引チャット機能・レビュー機能も備えています。
 
 ## 環境構築
 
@@ -128,6 +89,8 @@ composer require stripe/stripe-php
 このアプリでは、メール認証が完了しないとログインできない仕様になっています。
 Mailhog を使用してメールの確認を行います。
 
+また、購入者が取引を完了すると出品者に対して自動でメールが送信される仕様になっています。
+
 #### Mailhog
 
 Mailhog はこのプロジェクトに Docker コンテナとして組み込まれており、インストールする必要はありません。
@@ -194,19 +157,25 @@ php artisan test
 - Laravel11.45.0
 - MySQL8.0.26
 
+## ダミーデータについて
+今回は3つのユーザーデータを作成しています。
+- User One
+CO01～CO05までの商品を出品
+email : user1@example.com
+password : password123
+
+- User Two
+CO06～CO010までの商品を出品
+email : user2@example.com
+password : password123
+
+- User Three
+何も紐づけられていないユーザー
+email : user3@example.com
+password : password123
+
 ## ER図
 ![alt](./images/er.png)
-
-## テーブル設計
-![テーブル設計](./images/thumbnail_image0.jpg)
-![テーブル設計](./images/thumbnail_image1.jpg)
-![テーブル設計](./images/thumbnail_image2.jpg)
-![テーブル設計](./images/thumbnail_image3.jpg)
-![テーブル設計](./images/GetAttachmentThumbnail.jpg)
-![テーブル設計](./images/thumbnail_image4.jpg)
-![テーブル設計](./images/image7.jpeg)
-![テーブル設計](./images/image8.jpeg)
-![テーブル設計](./images/image9.jpeg)
 
 ## URL
 - 開発環境：http://localhost/
