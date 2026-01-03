@@ -17,7 +17,6 @@
             <div class="top-header__logo">
                 <img src="{{ asset('storage/logo/logo.svg') }}" alt="COACHTECH" class="top-header__logo-img">
             </div>
-            @if (!request()->is('trades*'))
                 <form class="top-header__search-form" action="/" method="GET">
                     @csrf
                     @if (request('tab') === 'mylist')
@@ -26,10 +25,8 @@
                     <input type="text" name="keyword" value="{{ request('keyword') }}"
                         class="top-header__search-input" placeholder="なにをお探しですか？">
                 </form>
-            @endif
             <nav class="top-header__nav">
                 <ul class="top-header__nav-list">
-                    @if (!request()->is('trades*'))
                         @auth
                             <li>
                                 <form action="/logout" method="post">
@@ -43,7 +40,6 @@
                             <li><a class="top-header__nav-item" href="/login">マイページ</a></li>
                         @endauth
                         <li><a class="top-header__nav-item--white" href="/sell">出品</a></li>
-                    @endif
                 </ul>
             </nav>
         </div>

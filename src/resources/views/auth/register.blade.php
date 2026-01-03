@@ -13,9 +13,7 @@
         <header class="top-header">
             <div class="top-header__inner">
                 <div class="top-header__logo">
-                <a href="/">
                     <img src="{{ asset('storage/logo/logo.svg') }}" alt="COACHTECH" class="top-header__logo-img">
-                </a>
                 </div>
             </div>
         </header>

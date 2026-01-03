@@ -163,6 +163,18 @@
     font-weight: bold;
 }
 
+.profile__star {
+    font-size: 30px;
+}
+
+.profile__star--filled {
+    color: #fff048;
+}
+
+.profile__star--empty {
+    color: #d9d9d9;
+}
+
 /* タブレット（768px〜850px）対応 */
 @media screen and (max-width: 850px) and (min-width: 768px) {
     .item-list__grid {

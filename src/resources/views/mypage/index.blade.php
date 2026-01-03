@@ -11,13 +11,16 @@
         </div>
         <div class="user-profile__info">
             <div class="user-profile__name">{{ $user->name }}</div>
-            <div>
-                @if (!is_null($averageRating))
-                    <div class="profile__rating">
-                        {{ $averageRating }}
-                    </div>
-                @endif
-            </div>
+            @if (!is_null($averageRating))
+                <div class="profile__rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <span
+                            class="profile__star {{ $i <= $averageRating ? 'profile__star--filled' : 'profile__star--empty' }}">
+                            ★
+                        </span>
+                    @endfor
+                </div>
+            @endif
         </div>
         <div class="user-profile__actions">
             <a href="/mypage/profile" class="user-profile__edit-btn">プロフィールを編集</a>
