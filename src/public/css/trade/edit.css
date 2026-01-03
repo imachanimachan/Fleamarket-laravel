@@ -1,0 +1,23 @@
+.submit {
+    padding: 8px 16px;
+    border: 1px solid #ff8282;
+    background-color: #ff8282;
+    color: #ffffff;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 160px;
+    margin-top: 20px;
+}
+.edit__container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: first baseline;
+}
+
+.edit__main form {
+    display: flex;
+    flex-direction: column;
+}

@@ -145,23 +145,26 @@
                             {{ $errors->first('body') }}
                         </p>
                     @endif
-                    <input class="trade__input" type="text" name="body"
-                        value="{{ old('body', $draftBody ?? '') }}" placeholder="取引メッセージを記入してください">
                     @if ($errors->has('image'))
                         <p class="chat__error">
                             {{ $errors->first('image') }}
                         </p>
                     @endif
 
-                    <input type="file" name="image" accept="image/*" hidden id="trade-image-input">
 
-                    <label for="trade-image-input" class="trade__image-button">
-                        画像を追加
-                    </label>
+                    <div class="trade__form-row">
+                        <input class="trade__input" type="text" name="body"
+                            value="{{ old('body', $draftBody ?? '') }}" placeholder="取引メッセージを記入してください">
+                        <input type="file" name="image" accept="image/*" hidden id="trade-image-input">
 
-                    <button class="trade__send-button" type="submit">
-                        <img src="{{ asset('storage/logo/send.jpg') }}" alt="送信">
-                    </button>
+                        <label for="trade-image-input" class="trade__image-button">
+                            画像を追加
+                        </label>
+
+                        <button class="trade__send-button" type="submit">
+                            <img src="{{ asset('storage/logo/send.jpg') }}" alt="送信">
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
