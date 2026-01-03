@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/mypage/index.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/mypage/index.css') }}">
 @endsection
 
 @section('content')
@@ -11,6 +11,13 @@
         </div>
         <div class="user-profile__info">
             <div class="user-profile__name">{{ $user->name }}</div>
+            <div>
+                @if (!is_null($averageRating))
+                    <div class="profile__rating">
+                        {{ $averageRating }}
+                    </div>
+                @endif
+            </div>
         </div>
         <div class="user-profile__actions">
             <a href="/mypage/profile" class="user-profile__edit-btn">プロフィールを編集</a>
@@ -26,7 +33,7 @@
             <a href="/mypage?tab=trade"
                 class="item-list__tab-link {{ request('tab') === 'trade' ? 'item-list__tab-link--active' : '' }}">
                 取引中の商品
-                @if($tradeCount > 0)
+                @if ($tradeCount > 0)
                     <span class="item-list__badge">
                         {{ $tradeCount }}
                     </span>
@@ -45,14 +52,14 @@
                     @endif
                     @if (request('tab') === 'trade')
                         <a href="{{ route('trade.index', ['id' => $item->id]) }}">
-                    @else
+                        @else
                             <a href="{{ route('item.show', ['id' => $item->id]) }}">
-                        @endif
-                            <div class="item-card__image">
-                                <img src="{{ asset('storage/items/' . $item->image_path) }}" alt="{{ $item->name }}">
-                            </div>
-                        </a>
-                        <div class="item-card__name">{{ $item->name }}</div>
+                    @endif
+                    <div class="item-card__image">
+                        <img src="{{ asset('storage/items/' . $item->image_path) }}" alt="{{ $item->name }}">
+                    </div>
+                    </a>
+                    <div class="item-card__name">{{ $item->name }}</div>
                 </div>
             @endforeach
         </div>

@@ -38,6 +38,8 @@ class ProfileController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
 
+        $averageRating = $user->averageRating();
+
         $tab = $request->query('tab', 'sell');
 
         $tradeCount = Item::whereHas('order', function ($q) use ($user) {
@@ -84,6 +86,6 @@ class ProfileController extends Controller
 
             $items = $user->items;
         }
-        return view('mypage.index', compact('user', 'items', 'tradeCount'));
+        return view('mypage.index', compact('user', 'items', 'tradeCount', 'averageRating'));
     }
 }

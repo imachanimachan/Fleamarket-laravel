@@ -8,6 +8,8 @@ use App\Models\Item;
 use App\Models\Message;
 use App\Models\Review;
 use App\Http\Requests\ChatMessageRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TradeCompletedMail;
 
 class TradeController extends Controller
 {
@@ -156,6 +158,9 @@ class TradeController extends Controller
             $order->update([
                 'buyer_completed' => true,
             ]);
+
+            Mail::to($item->user->email)
+                ->send(new TradeCompletedMail($item));
         } elseif ($user->id === $item->user_id) {
             $order->update([
                 'seller_completed' => true,

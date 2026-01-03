@@ -64,6 +64,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Review::class, 'reviewed_user_id');
     }
 
+    public function averageRating(): ?int
+    {
+        $avg = $this->receivedReviews()->avg('rating');
+        if (is_null($avg)) {
+            return null;
+        }
+
+        return round($avg);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
