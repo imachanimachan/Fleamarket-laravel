@@ -195,7 +195,7 @@ php artisan test
 - MySQL8.0.26
 
 ## ER図
-![alt](index.drawio.png)
+![alt](./images/er.png)
 
 ## テーブル設計
 ![テーブル設計](./images/thumbnail_image0.jpg)
