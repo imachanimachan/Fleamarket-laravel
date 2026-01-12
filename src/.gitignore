@@ -31,3 +31,5 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+!/storage/app/public/logo/
+!/storage/app/public/logo/**
