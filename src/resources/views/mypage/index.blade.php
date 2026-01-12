@@ -36,9 +36,9 @@
             <a href="/mypage?tab=trade"
                 class="item-list__tab-link {{ request('tab') === 'trade' ? 'item-list__tab-link--active' : '' }}">
                 取引中の商品
-                @if ($tradeCount > 0)
+                @if ($notificationTotal > 0)
                     <span class="item-list__badge">
-                        {{ $tradeCount }}
+                        {{ $notificationTotal }}
                     </span>
                 @endif
             </a>

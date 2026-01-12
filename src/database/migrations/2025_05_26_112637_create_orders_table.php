@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->foreignId('payment_method_id')->constrained()->cascadeOnDelete();
             $table->timestamp('paid_at')->nullable();
             $table->boolean('buyer_completed')->default(false);
-            $table->boolean('seller_completed')->default(false);
             $table->timestamps();
         });
     }

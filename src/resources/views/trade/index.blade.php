@@ -55,10 +55,9 @@
                 @php
                     $order = $currentItem->order;
                     $isBuyer = Auth::id() === $order->user_id;
-                    $isSeller = Auth::id() === $currentItem->user_id;
                 @endphp
 
-                @if (($isBuyer && !$order->buyer_completed) || ($isSeller && $order->buyer_completed && !$order->seller_completed))
+                @if ($isBuyer && !$order->buyer_completed)
                     <form method="POST" action="{{ route('trade.complete', ['item' => $currentItem->id]) }}">
                         @csrf
                         <button type="submit" class="trade__complete-button">
@@ -170,7 +169,14 @@
         </div>
     </div>
 
-    @if (session('showReviewModal'))
+    @php
+        $order = $currentItem->order;
+        $isBuyer = Auth::id() === $order->user_id;
+
+        $showReviewModal = session('showReviewModal') || ($order->buyer_completed);
+    @endphp
+
+    @if ($showReviewModal)
         <div class="review-modal">
             <div class="review-modal__content">
                 <div class="review-modal__h2">

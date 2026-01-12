@@ -35,15 +35,14 @@ class TradeController extends Controller
             'user',
         ])
             ->where(function ($q) use ($user) {
+
                 $q->whereHas('order', function ($q2) use ($user) {
                     $q2->where('user_id', $user->id)
                         ->where('buyer_completed', false);
                 })
                     ->orWhere(function ($q2) use ($user) {
                         $q2->where('user_id', $user->id)
-                            ->whereHas('order', function ($q3) use ($user) {
-                                $q3->where('seller_completed', false);
-                            });
+                            ->whereHas('order');
                     });
             })
             ->withMax('messages', 'created_at')
@@ -150,27 +149,29 @@ class TradeController extends Controller
     public function complete(Item $item)
     {
         $user = Auth::user();
+
         $order = $item->order;
-        if ($order->user_id !== $user->id && $item->user_id !== $user->id) {
+
+        if ($order->user_id !== $user->id) {
             abort(403);
         }
-        if ($user->id === $order->user_id) {
-            $order->update([
-                'buyer_completed' => true,
-            ]);
 
-            Mail::to($item->user->email)
-                ->send(new TradeCompletedMail($item));
-        } elseif ($user->id === $item->user_id) {
-            $order->update([
-                'seller_completed' => true,
-            ]);
+        if ($order->buyer_completed) {
+            return redirect()
+                ->route('trade.index', ['id' => $item->id]);
         }
+
+        $order->update([
+            'buyer_completed' => true,
+        ]);
+
+        Mail::to($item->user->email)
+            ->send(new TradeCompletedMail($item));
+
         return redirect()
             ->route('trade.index', ['id' => $item->id])
             ->with('showReviewModal', true);
     }
-
 
     public function storeReview(Request $request)
     {

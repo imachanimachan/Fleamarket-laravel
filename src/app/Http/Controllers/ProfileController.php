@@ -42,17 +42,30 @@ class ProfileController extends Controller
 
         $tab = $request->query('tab', 'sell');
 
-        $tradeCount = Item::whereHas('order', function ($q) use ($user) {
-            $q->where('user_id', $user->id)
-                ->where('buyer_completed', false); // 購入者として未完了
-        })
-            ->orWhere(function ($q) use ($user) {
-                $q->where('user_id', $user->id)
-                    ->whereHas('order', function ($q2) use ($user) {
-                        $q2->where('seller_completed', false); // 出品者として未完了
+        $tradeItems = Item::whereHas('order', function ($q) use ($user) {
+            $q->where(function ($q2) use ($user) {
+
+                $q2->where(function ($q3) use ($user) {
+                    $q3->where('user_id', $user->id)
+                        ->where('buyer_completed', false);
+                })
+                    ->orWhereHas('item', function ($q4) use ($user) {
+                        $q4->where('user_id', $user->id);
                     });
-            })
-            ->count();
+            });
+        })
+
+            ->withCount([
+                'messages as notify_count' => function ($q) use ($user) {
+                    $q->where('user_id', '!=', $user->id)
+                        ->whereNull('read_at');
+                }
+            ])
+            ->withMax('messages', 'created_at')
+            ->orderByDesc('messages_max_created_at')
+            ->get();
+
+        $notificationTotal = $tradeItems->sum('notify_count');
 
 
         if ($tab === 'buy') {
@@ -60,32 +73,11 @@ class ProfileController extends Controller
 
         } elseif ($tab === 'trade') {
 
-            $items = Item::whereHas('order', function ($q) use ($user) {
-                // 購入者なら buyer_completed = false
-                // 出品者なら seller_completed = false
-                $q->where(function ($q2) use ($user) {
-                    $q2->where('user_id', $user->id)
-                        ->where('buyer_completed', false)
-                        ->orWhere(function ($q3) use ($user) {
-                            $q3->whereHas('item', function ($q4) use ($user) {
-                                $q4->where('user_id', $user->id);
-                            })
-                                ->where('seller_completed', false);
-                        });
-                });
-            })
-                ->withCount([
-                    'messages as notify_count' => function ($q) use ($user) {
-                        $q->where('user_id', '!=', $user->id)
-                            ->whereNull('read_at');
-                    }
-                ])
-                ->get();
-
+            $items = $tradeItems;
         } else {
 
             $items = $user->items;
         }
-        return view('mypage.index', compact('user', 'items', 'tradeCount', 'averageRating'));
+        return view('mypage.index', compact('user', 'items', 'averageRating', 'notificationTotal'));
     }
 }
