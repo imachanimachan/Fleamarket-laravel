@@ -177,7 +177,7 @@ email : user3@example.com
 password : password123
 
 ## ER図
-![alt](./images/er.png)
+![alt](./images/ER図.png)
 
 ## URL
 - 開発環境：http://localhost/
