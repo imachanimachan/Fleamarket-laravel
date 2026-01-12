@@ -63,9 +63,9 @@ class Item extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function review()
+    public function reviews()
     {
-        return $this->hasOne(Review::class);
+        return $this->hasMany(Review::class);
     }
 
     public function getIsSoldAttribute(): bool

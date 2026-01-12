@@ -35,26 +35,25 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $averageRating = $user->averageRating();
 
         $tab = $request->query('tab', 'sell');
 
-        $tradeItems = Item::whereHas('order', function ($q) use ($user) {
-            $q->where(function ($q2) use ($user) {
-
-                $q2->where(function ($q3) use ($user) {
-                    $q3->where('user_id', $user->id)
-                        ->where('buyer_completed', false);
-                })
-                    ->orWhereHas('item', function ($q4) use ($user) {
-                        $q4->where('user_id', $user->id);
-                    });
-            });
+        $tradeItems = Item::where(function ($query) use ($user) {
+            $query->whereHas('order', function ($q) use ($user) {
+                $q->where('user_id', $user->id)
+                    ->where('buyer_completed', false);
+            })
+                ->orWhere(function ($q) use ($user) {
+                    $q->where('user_id', $user->id)
+                        ->whereHas('order')
+                        ->whereDoesntHave('reviews', function ($q2) use ($user) {
+                            $q2->where('reviewer_id', $user->id);
+                        });
+                });
         })
-
             ->withCount([
                 'messages as notify_count' => function ($q) use ($user) {
                     $q->where('user_id', '!=', $user->id)

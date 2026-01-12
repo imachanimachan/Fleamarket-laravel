@@ -35,14 +35,16 @@ class TradeController extends Controller
             'user',
         ])
             ->where(function ($q) use ($user) {
-
                 $q->whereHas('order', function ($q2) use ($user) {
                     $q2->where('user_id', $user->id)
                         ->where('buyer_completed', false);
                 })
-                    ->orWhere(function ($q2) use ($user) {
-                        $q2->where('user_id', $user->id)
-                            ->whereHas('order');
+                    ->orWhere(function ($q) use ($user) {
+                        $q->where('user_id', $user->id)
+                            ->whereHas('order')
+                            ->whereDoesntHave('reviews', function ($q2) use ($user) {
+                                $q2->where('reviewer_id', $user->id);
+                            });
                     });
             })
             ->withMax('messages', 'created_at')
@@ -188,7 +190,7 @@ class TradeController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('mypage.index');
+        return redirect('/');
     }
 
 }
